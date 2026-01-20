@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= (typeof title !== 'undefined' && title) ? title : 'Clientes' %></title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="/home">
+        <span class="brand__dot"></span>
+        <span>CanteraVenta</span>
+      </a>
+
+      <% if (user) { %>
+        <div class="nav__links">
+          <a class="btn btn--ghost" href="/cantera">Cantera</a>
+          <a class="btn btn--ghost" href="/viajes">Viajes</a>
+          <a class="btn btn--ghost" href="/stock">Stock</a>
+          <a class="btn btn--ghost" href="/clientes">Clientes</a>
+        </div>
+
+        <div class="nav__right">
+          <span class="small">👤 <%= user.username %></span>
+          <form method="POST" action="/logout">
+            <button class="btn btn--danger" type="submit">Salir</button>
+          </form>
+        </div>
+      <% } else { %>
+        <div class="nav__right" style="margin-left:auto;">
+          <a class="btn btn--primary" href="/login">Ingresar</a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row row--space">
+      <h1>Clientes</h1>
+      <a class="btn btn--primary" href="/clientes/nuevo">Nuevo cliente</a>
+    </div>
+
+    <% if (!clients || clients.length === 0) { %>
+      <div class="card">
+        <p>No hay clientes cargados.</p>
+      </div>
+    <% } else { %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre completo</th>
+            <th>Teléfono</th>
+            <th style="width: 220px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% clients.forEach(c => { %>
+            <tr>
+              <td><%= c.full_name %></td>
+              <td><%= c.phone || '-' %></td>
+              <td>
+                <a class="btn btn--ghost btn--sm" href="/clientes/<%= c.id %>/editar">Editar</a>
+
+                <form method="POST"
+                      action="/clientes/<%= c.id %>/eliminar"
+                      style="display:inline;"
+                      onsubmit="return confirm('¿Eliminar este cliente?');">
+                  <button class="btn btn--danger btn--sm" type="submit">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+
+  <div class="footer">
+    <div class="small">Sistema interno — versión sin DB (memoria). Listo para migrar a PostgreSQL.</div>
+  </div>
+</body>
+</html>

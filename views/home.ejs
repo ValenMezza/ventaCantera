@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head', { title: 'Home' }) %>
+<body>
+  <%- include('partials/nav') %>
+
+  <div class="container">
+    <h1>Panel principal</h1>
+    <p class="muted">Accedé a los módulos del sistema</p>
+
+    <div class="grid">
+      <a href="/cantera" class="card card--link">
+        <h2>Cantera</h2>
+        <p class="muted">Ventas rápidas y resúmenes</p>
+      </a>
+
+      <a href="/viajes" class="card card--link">
+        <h2>Viajes</h2>
+        <p class="muted">Ventas con envío y fletes</p>
+      </a>
+
+      <a href="/stock" class="card card--link">
+        <h2>Stock</h2>
+        <p class="muted">Gestión de productos</p>
+      </a>
+
+      <a href="/clientes" class="card card--link">
+        <h2>Clientes</h2>
+        <p class="muted">Alta y edición de clientes</p>
+      </a>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>
