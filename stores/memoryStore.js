@@ -1,7 +1,7 @@
 const { formatISODate } = require('../utils/dates');
 
 const state = {
-  users: [{ id: 1, username: 'admin', password: 'admin123' }],
+  users: [{ id: 1, username: 'admin', password: 'mezza123' }],
 
   clients: [
     { id: 1, full_name: 'Cliente Demo', phone: '3510000000' }
